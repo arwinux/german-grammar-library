@@ -1,0 +1,107 @@
+@import 'tailwindcss';
+
+/* Tailwind v4 theme. "inline" keeps the var() references live, so per-element overrides such as --c (level color) work. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel2: var(--panel2);
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-acc: var(--acc);
+  --color-accsoft: var(--accsoft);
+  --color-lv: var(--c);
+  --font-sans: 'Inter Variable', 'Vazirmatn Variable', system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', 'Vazirmatn Variable', Georgia, serif;
+  --font-fa: 'Vazirmatn Variable', 'Inter Variable', sans-serif;
+  --font-naskh: 'Noto Naskh Arabic Variable', 'Vazirmatn Variable', serif;
+  --shadow-card: var(--sh);
+  --animate-up: up 0.4s both;
+}
+@keyframes up { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---------- design tokens (light / dark) ---------- */
+:root {
+  --bg:#f6f4ef; --panel:#fffdf9; --panel2:#f0ede5; --ink:#1c1b19; --mute:#6b675e; --line:#e4dfd3;
+  --acc:#c8472b; --accsoft:#c8472b1a; --glow:#e9a23b55;
+  --a1:#1f9d6b; --a2:#2b7fd1; --b1:#d38a14; --b2:#b23a7a;
+  --sh:0 1px 2px #0001,0 12px 32px -12px #3d2f1a2b;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg:#121214; --panel:#1a1a1e; --panel2:#222228; --ink:#f1eee8; --mute:#9b978d; --line:#2c2c33;
+    --acc:#ff7a59; --accsoft:#ff7a5924; --glow:#7c5cff30;
+    --a1:#3ddc97; --a2:#5ea8ff; --b1:#f5b942; --b2:#ff6fb1;
+    --sh:0 1px 2px #0006,0 16px 40px -16px #000a; color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg:#121214; --panel:#1a1a1e; --panel2:#222228; --ink:#f1eee8; --mute:#9b978d; --line:#2c2c33;
+  --acc:#ff7a59; --accsoft:#ff7a5924; --glow:#7c5cff30;
+  --a1:#3ddc97; --a2:#5ea8ff; --b1:#f5b942; --b2:#ff6fb1;
+  --sh:0 1px 2px #0006,0 16px 40px -16px #000a; color-scheme: dark;
+}
+
+@layer base {
+  *, ::after, ::before, ::backdrop { border-color: var(--line); }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body, #root { height: 100%; margin: 0; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body { @apply bg-bg font-sans text-ink antialiased; font-size: 16px; line-height: 1.65; }
+  button { @apply cursor-pointer; font: inherit; color: inherit; background: none; border: 0; }
+  :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; border-radius: 8px; }
+  h1, h2, h3 { @apply font-display; letter-spacing: -0.02em; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+}
+
+@layer components {
+  .card { @apply rounded-[20px] border border-line bg-panel p-5 text-start shadow-card; }
+  button.card { @apply relative transition duration-200 hover:-translate-y-1; }
+  button.card:hover { border-color: var(--c, var(--acc)); }
+  .btn { @apply inline-flex items-center gap-2 rounded-[14px] bg-ink px-5 py-3 font-semibold text-bg transition-transform hover:-translate-y-0.5; }
+  .btn-ghost { @apply border border-line bg-panel text-ink; }
+  .chip { @apply rounded-full border border-line bg-panel px-3 py-1.5 text-[13px]; }
+  .chip-on { @apply border-ink bg-ink text-bg; }
+  .badge { @apply inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold; color: var(--c); background: color-mix(in srgb, var(--c) 16%, transparent); }
+  .sec { @apply mb-4.5 animate-up rounded-[20px] border border-line bg-panel p-6.5 shadow-card max-md:p-4.5; }
+  .sec > h2 { @apply mb-3.5 mt-0 text-[21px] font-bold; }
+  .sec-fehler { border-color: #e5484d55; } .sec-fehler > h2 { color: #e5484d; }
+  .sec-verw { border-color: #f5a52455; }
+  .sec-merk { @apply border-transparent bg-accsoft; }
+
+  /* rendered markdown */
+  .md { @apply text-[16px]; }
+  .md p, .md li, .md td, .md th { unicode-bidi: plaintext; }
+  .md p { @apply my-[0.6em]; }
+  .md ul, .md ol { @apply my-2 ps-[1.3em]; } .md ul { @apply list-disc; } .md ol { @apply list-decimal; }
+  .md li { @apply my-1; }
+  .md strong { @apply text-acc; }
+  .md code { @apply rounded-md bg-panel2 px-1.5; }
+  .md pre { @apply m-0 overflow-auto whitespace-pre-wrap rounded-[14px] border border-line bg-panel2 px-4.5 py-4 text-ink; font-weight: 500; line-height: 1.6; }
+  .md pre code { @apply bg-transparent p-0 text-inherit; unicode-bidi: plaintext; font: inherit; }
+  .md blockquote { @apply my-3 border-s-[3px] border-acc px-4 py-1 text-mute; }
+  .md .tw { @apply my-3 overflow-x-auto rounded-[14px] border border-line; }
+  .md table { @apply w-full border-collapse text-[15px]; }
+  .md th { @apply bg-panel2 text-start text-xs uppercase tracking-wider text-mute; }
+  .md td, .md th { @apply border-b border-line px-3.5 py-2.5 align-top; }
+  .md tr:last-child td { @apply border-0; }
+  .md details { @apply mt-3.5 rounded-[14px] border border-dashed border-line px-4 py-3; }
+  .md summary { @apply cursor-pointer font-semibold text-acc; }
+}
+
+/* Persian: Vazirmatn everywhere, Naskh for example translations, roomier line height */
+html[dir='rtl'] { --d: -1; }
+html[lang='fa'] body { font-family: 'Vazirmatn Variable', 'Inter Variable', sans-serif; line-height: 1.9; }
+html[lang='fa'] :is(h1, h2, h3, .font-display) { font-family: 'Vazirmatn Variable', sans-serif; font-weight: 800; line-height: 1.4; letter-spacing: 0; }
+html[lang='fa'] :is(.uppercase, .md th) { text-transform: none; letter-spacing: 0; }
+html[lang='fa'] em { font-style: normal; }
+.hide-fa .fa-line { display: none; }
+
+/* CSS flags used instead of flag emojis (see src/lib/markdown.js) */
+.flag { display: inline-block; width: 1.3em; height: 0.9em; margin-inline-end: 0.15em; vertical-align: -0.1em; border-radius: 3px; background-size: cover; background-position: center; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.18); }
+.flag-de { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'%3E%3Crect width='5' height='3' fill='%23FFCE00'/%3E%3Crect width='5' height='2' fill='%23DD0000'/%3E%3Crect width='5' height='1' fill='%23000'/%3E%3C/svg%3E"); }
+.flag-ir { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 4.2'%3E%3Crect width='7' height='4.2' fill='%23fff'/%3E%3Crect width='7' height='1.4' fill='%23239f40'/%3E%3Crect y='2.8' width='7' height='1.4' fill='%23da0000'/%3E%3Ccircle cx='3.5' cy='2.1' r='.5' fill='none' stroke='%23da0000' stroke-width='.16'/%3E%3Cpath d='M3.5 1.55v1.1' stroke='%23da0000' stroke-width='.16'/%3E%3C/svg%3E"); }

@@ -2,6 +2,8 @@
 
 # 📚 Grammatik-Bibliothek
 
+![Project Preview](./preview.png)
+
 **A German grammar library for levels A1 to B2: rules, examples, flashcards and mini-tests in one calm, fast web app.**
 
 ![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)
@@ -9,6 +11,8 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Languages](https://img.shields.io/badge/UI-DE%20%C2%B7%20EN%20%C2%B7%20FA-c8472b)
+
+### 🌐 [Live demo](https://german-grammar-library.vercel.app/)
 
 </div>
 
@@ -20,14 +24,16 @@ Grammatik-Bibliothek turns a folder of Markdown study notes into a browsable lea
 
 The app is a static site. There is no backend, no account and no database.
 
+👉 **Try it live:** [Grammatik-Bibliothek · Deutsch A1–B2](https://german-grammar-library.vercel.app/), hosted on [Vercel](https://vercel.com).
+
 ## What is inside
 
-| | |
-|---|---|
-| **Lessons** | 117 (A1: 25 · A2: 30 · B1: 31 · B2: 31) |
-| **Sections per lesson** | 19 |
-| **Flashcards** | 585 |
-| **Example sentences** | 2,107 (German with Persian translation) |
+|                         |                                         |
+| ----------------------- | --------------------------------------- |
+| **Lessons**             | 117 (A1: 25 · A2: 30 · B1: 31 · B2: 31) |
+| **Sections per lesson** | 19                                      |
+| **Flashcards**          | 585                                     |
+| **Example sentences**   | 2,107 (German with Persian translation) |
 
 The numbers above are counted from the notes in `content/` by `scripts/build-content.mjs`.
 
@@ -59,10 +65,10 @@ npm run preview    # serve the production build locally
 
 `npm run build` produces a static site in `dist/`. It uses hash links (`#a1-01`) and relative asset paths, so it needs no rewrite rules and also works from a sub-folder.
 
-| Host | Settings |
-|---|---|
+| Host                              | Settings                                               |
+| --------------------------------- | ------------------------------------------------------ |
 | Netlify, Vercel, Cloudflare Pages | Build command `npm run build`, output directory `dist` |
-| GitHub Pages or any static host | Upload the contents of `dist/` |
+| GitHub Pages or any static host   | Upload the contents of `dist/`                         |
 
 ## Editing the lessons
 
@@ -76,13 +82,13 @@ npm run content    # writes src/data/lessons.json
 
 Each note is a Markdown file with frontmatter (`title`, `level`, tags) and `##` sections. The script reads these sections:
 
-| Tab | Sections |
-|---|---|
+| Tab      | Sections                                                                                         |
+| -------- | ------------------------------------------------------------------------------------------------ |
 | Overview | Idea in 10 seconds, Golden formula, Mini rule card, Visual memory aid, Teacher's memory sentence |
-| Rules | Key rules, Extra overviews, Don't mix these up, Typical mistakes, Sentence lab |
-| Examples | Examples, Everyday examples, Mini dialogue |
-| Practice | Mini test, Speaking, Writing, Flashcards |
-| Remember | 30-second review, Spaced repetition plan |
+| Rules    | Key rules, Extra overviews, Don't mix these up, Typical mistakes, Sentence lab                   |
+| Examples | Examples, Everyday examples, Mini dialogue                                                       |
+| Practice | Mini test, Speaking, Writing, Flashcards                                                         |
+| Remember | 30-second review, Spaced repetition plan                                                         |
 
 Example lines are expected as a 🇩🇪 line followed by a 🇮🇷 line. Flashcards are expected as `**Frage:**` / `**Antwort:**` pairs.
 
@@ -106,6 +112,13 @@ vite.config.js                    React + Tailwind plugins, relative base path, 
 - [marked](https://marked.js.org) renders the Markdown in each section
 - [Fontsource](https://fontsource.org) packages serve Inter, Fraunces, Vazirmatn and Noto Naskh Arabic from your own site, so the app makes no requests to Google Fonts
 
+## Made with AI
+
+- **App:** this web app was built with the help of [Claude](https://claude.ai), an AI assistant made by Anthropic.
+- **Lesson content:** the Markdown notes in `content/` were generated with [DeepSeek](https://www.deepseek.com), an AI model.
+
+AI-generated text can contain mistakes. Check the grammar rules, example sentences and Persian translations against a trusted source before relying on them.
+
 ## Good to know
 
 - **Only the interface is translated.** Lesson explanations stay in German, with Persian translations where the notes contain them. There is no English lesson text.
@@ -124,10 +137,6 @@ Made by **arwinux**
 - Telegram channel: [@arwinuxrepo](https://t.me/arwinuxrepo)
 - LeetCode: [leetcode.com/u/arwinux](https://leetcode.com/u/arwinux/)
 
-The same credits appear in the app as a slim bar at the bottom of every page (icon links that expand to show the address on hover) and a small line in the sidebar. The icons are from [Simple Icons](https://simpleicons.org) (CC0); the logos remain trademarks of their owners. To change the credits, edit `src/lib/author.js`.
-
 ## License
 
 Released under the [MIT License](LICENSE).
-
-The lesson notes in `content/` are part of this project. Make sure you have the right to publish them under the same license.
